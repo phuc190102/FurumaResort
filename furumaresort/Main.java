@@ -15,7 +15,8 @@ public class Main {
 		house.setId("2");
 		house.showInfor();
 		room.setId("3");
-		room.showInfor();
 		room.setHireFee(2000);
+		room.showInfor();
+
 	}
 }
