@@ -1,6 +1,6 @@
 package furumaresort.Models;
 
-import furuma.Models.Services;
+import furumaresort.Models.Services;
 
 public class Room extends Services {
 	public String freeService;
