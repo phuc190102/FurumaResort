@@ -3,10 +3,11 @@ package furumaresort;
 import furumaresort.Models.House;
 import furumaresort.Models.Room;
 import furumaresort.Models.Villa;
-
+import furumaresort.Controllers.MainController;
 public class Main {
 
 	public static void main(String[] args) {
+
 		Villa villa = new Villa();
 		House house = new House();
 		Room room = new Room();
