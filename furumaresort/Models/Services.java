@@ -1,7 +1,7 @@
 package furumaresort.Models;
 
 public abstract class Services {
-	private String id;
+	public String id;
 	public String serviceName;
 	public float usedArea;
 	public float hireFee;

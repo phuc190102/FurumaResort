@@ -2,6 +2,8 @@ package furumaresort.Models;
 
 import furumaresort.Models.Services;
 
+import java.util.Scanner;
+
 public class Villa extends Services {
 	public String roomStandard;
 	public String description;
@@ -44,7 +46,7 @@ public class Villa extends Services {
 	}
 
 	public void showInfor(){
-		System.out.println("Id: "+this.getId());
+		System.out.println("Id: "+this.id);
 		System.out.println("Tên dịch vụ: "+this.serviceName);
 		System.out.println("Diện tích sử dụng: "+this.usedArea);
 		System.out.println("Chi phí thuê: "+this.hireFee);
@@ -54,6 +56,49 @@ public class Villa extends Services {
 		System.out.println("Tiêu chuẩn phòng: "+this.roomStandard);
 		System.out.println("Diện tích hồ bơi: "+this.poolArea);
 		System.out.println("Số tầng: "+this.floor);
+	}
+	public void inputData(){
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("===== ADD NEW VILLA =====");
+		System.out.print("Enter id: ");
+		this.id = scanner.nextLine();
 
+		System.out.print("Enter Service Name: ");
+		this.serviceName = scanner.nextLine();
+
+		System.out.print("Enter usedArea: ");
+		this.usedArea = scanner.nextFloat();
+		scanner.nextLine(); // consume the '\n' character
+
+		System.out.print("Enter hire Type: ");
+		this.hireType = scanner.nextLine();
+
+
+		System.out.print("Enter max number of people: ");
+		this.maxCustomer = scanner.nextInt();
+		scanner.nextLine(); // consume the '\n' character
+
+		System.out.print("Enter hire fee: ");
+		this.hireFee = scanner.nextFloat();
+		scanner.nextLine(); // consume the '\n' character
+
+		System.out.print("Enter room standard: ");
+		this.roomStandard = scanner.nextLine();
+
+		System.out.print("Enter pool area: ");
+		this.poolArea = scanner.nextFloat();
+		scanner.nextLine(); // consume the '\n' character
+
+		System.out.print("Enter number of floors: ");
+		this.floor = scanner.nextInt();
+		scanner.nextLine(); // consume the '\n' character
+
+		System.out.println("Enter the description: ");
+		this.description = scanner.nextLine();
+	}
+	public String toCsvString() {
+		return String.format("%s,%s,%.1f,%s,%d,%.1f,%s,%.1f,%s,%d",
+			this.id, this.serviceName, this.usedArea, this.hireType, this.maxCustomer,
+			this.hireFee, this.roomStandard, this.poolArea, this.description, this.floor);
 	}
 }

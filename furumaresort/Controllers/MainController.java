@@ -1,13 +1,18 @@
 package furumaresort.Controllers;
 
+import furumaresort.Models.House;
+import furumaresort.Models.Room;
+import furumaresort.Models.Villa;
+
+import java.io.PrintWriter;
 import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class MainController {
-	private final String villaFile = "Data/Villa.csv";
-	private final String houseFile = "Data/House.csv";
-	private final String roomFile = "Data/Room.csv";
+	private final String villaFile = "D:/Aphucdeptrai/furumaresort/Data/Villa.csv";
+	private final String houseFile = "D:/Aphucdeptrai/furumaresort/Data/House.csv";
+	private final String roomFile = "D:/Aphucdeptrai/furumaresort/Data/Room.csv";
 	Scanner scanner = new Scanner(System.in);
 	public void displayMainMenu() {
 		int choice;
@@ -21,7 +26,7 @@ public class MainController {
 		System.out.println("5.Add New Booking");
 		System.out.println("6.Show Information Of Employee");
 		System.out.println("7.Exit");
-		System.out.print("Mời bạn lựa chọn");
+		System.out.print("Mời bạn lựa chọn: ");
 		choice = scanner.nextInt();
 		switch (choice){
 			case 1:
@@ -74,7 +79,8 @@ public class MainController {
 					addNewRoom();
 					break;
 				case 4:
-					return;
+					addNewServices();
+					break;
 				case 5:
 					System.exit(0);
 				default:
@@ -84,144 +90,48 @@ public class MainController {
 	}
 
 	public void addNewVilla() {
-		Scanner scanner = new Scanner(System.in);
-		try {
-			FileWriter writer = new FileWriter(villaFile, true);
 
-			System.out.println("===== ADD NEW VILLA =====");
-			System.out.print("Enter id: ");
-			String id = scanner.nextLine();
-
-			System.out.print("Enter Service Name: ");
-			String serviceName = scanner.nextLine();
-
-			System.out.print("Enter usedArea: ");
-			float usedArea = scanner.nextFloat();
-			scanner.nextLine(); // consume the '\n' character
-
-			System.out.print("Enter hire Type: ");
-			String hireType = scanner.nextLine();
-			scanner.nextLine(); // consume the '\n' character
-
-			System.out.print("Enter max number of people: ");
-			int maxCustomer = scanner.nextInt();
-			scanner.nextLine(); // consume the '\n' character
-
-			System.out.print("Enter hire fee: ");
-			float hireFee = scanner.nextFloat();
-			scanner.nextLine(); // consume the '\n' character
-
-			System.out.print("Enter room standard: ");
-			String roomStandard = scanner.nextLine();
-
-			System.out.print("Enter pool area: ");
-			double poolArea = scanner.nextDouble();
-			scanner.nextLine(); // consume the '\n' character
-
-			System.out.print("Enter number of floors: ");
-			int floor = scanner.nextInt();
-			scanner.nextLine(); // consume the '\n' character
-
-			System.out.println("Enter the description: ");
-			String description = scanner.nextLine();
-			writer.write(String.format("%s,%s,%.2f,%s,%d,%.2f,%s,%.2f,%d,%s%n",
-				id, serviceName, usedArea, hireType, maxCustomer, hireFee,
-				roomStandard, poolArea, floor, description));
-
-			writer.close();
-			System.out.println("Add new villa successfully.");
-		} catch (IOException e) {
-			System.out.println("Failed to write to file: " + e.getMessage());
-		}
+		Villa villa = new Villa();
+		villa.inputData();
+		writeVillaToFile(villa);
+		System.out.println("New villa has been added successfully!");
 	}
+
 	public void addNewHouse() {
-
-		try {
-			FileWriter writer = new FileWriter(villaFile, true);
-
-			System.out.println("===== ADD NEW VILLA =====");
-			System.out.print("Enter id: ");
-			String id = scanner.nextLine();
-
-			System.out.print("Enter Service Name: ");
-			String serviceName = scanner.nextLine();
-
-			System.out.print("Enter usedArea: ");
-			float usedArea = scanner.nextFloat();
-			scanner.nextLine(); // consume the '\n' character
-
-			System.out.print("Enter hire Type: ");
-			String hireType = scanner.nextLine();
-			scanner.nextLine(); // consume the '\n' character
-
-			System.out.print("Enter max number of people: ");
-			int maxCustomer = scanner.nextInt();
-			scanner.nextLine(); // consume the '\n' character
-
-			System.out.print("Enter hire fee: ");
-			float hireFee = scanner.nextFloat();
-			scanner.nextLine(); // consume the '\n' character
-
-			System.out.print("Enter room standard: ");
-			String roomStandard = scanner.nextLine();
+		House house = new House();
+		house.inputData();
+		writeHouseToFile(house);
+		System.out.println("New house has been added successfully!");
 
 
-
-			System.out.print("Enter number of floors: ");
-			int floor = scanner.nextInt();
-			scanner.nextLine(); // consume the '\n' character
-
-			System.out.println("Enter the description: ");
-			String description = scanner.nextLine();
-			writer.write(String.format("%s,%s,%.2f,%s,%d,%.2f,%s,%d,%s%n",
-				id, serviceName, usedArea, hireType, maxCustomer, hireFee,
-				roomStandard, floor, description));
-
-			writer.close();
-			System.out.println("Add new villa successfully.");
-		} catch (IOException e) {
-			System.out.println("Failed to write to file: " + e.getMessage());
-		}
 	}
 	public void addNewRoom() {
+		Room room = new Room();
+		room.inputData();
+		writeRoomToFile(room);
+		System.out.println("New room has been added successfully!");
 
-		try {
-			FileWriter writer = new FileWriter(villaFile, true);
 
-			System.out.println("===== ADD NEW VILLA =====");
-			System.out.print("Enter id: ");
-			String id = scanner.nextLine();
-
-			System.out.print("Enter Service Name: ");
-			String serviceName = scanner.nextLine();
-
-			System.out.print("Enter usedArea: ");
-			float usedArea = scanner.nextFloat();
-			scanner.nextLine(); // consume the '\n' character
-
-			System.out.print("Enter hire Type: ");
-			String hireType = scanner.nextLine();
-			scanner.nextLine(); // consume the '\n' character
-
-			System.out.print("Enter max number of people: ");
-			int maxCustomer = scanner.nextInt();
-			scanner.nextLine(); // consume the '\n' character
-
-			System.out.print("Enter hire fee: ");
-			float hireFee = scanner.nextFloat();
-			scanner.nextLine(); // consume the '\n' character
-
-			System.out.print("Enter room standard: ");
-			String freeService = scanner.nextLine();
-
-			writer.write(String.format("%s,%s,%.2f,%s,%d,%.2f,%s%n",
-				id, serviceName, usedArea, hireType, maxCustomer, hireFee,
-				freeService));
-
-			writer.close();
-			System.out.println("Add new villa successfully.");
+	}
+	private void writeVillaToFile(Villa villa) {
+		try (PrintWriter writer = new PrintWriter(new FileWriter(villaFile, true))) {
+			writer.println(villa.toCsvString());
 		} catch (IOException e) {
-			System.out.println("Failed to write to file: " + e.getMessage());
+			System.out.println("Failed to write to file: " + villaFile);
+		}
+	}
+	private void writeHouseToFile(House house) {
+		try (PrintWriter writer = new PrintWriter(new FileWriter(houseFile, true))) {
+			writer.println(house.toCsvString());
+		} catch (IOException e) {
+			System.out.println("Failed to write to file: " + houseFile);
+		}
+	}
+	private void writeRoomToFile(Room room) {
+		try (PrintWriter writer = new PrintWriter(new FileWriter(roomFile, true))) {
+			writer.println(room.toCsvString());
+		} catch (IOException e) {
+			System.out.println("Failed to write to file: " + roomFile);
 		}
 	}
 }
