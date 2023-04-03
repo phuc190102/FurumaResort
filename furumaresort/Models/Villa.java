@@ -13,6 +13,21 @@ public class Villa extends Services {
 	public Villa() {
 	}
 
+	public Villa(String id, String serviceName, float usedArea, String hireType,
+				 int maxCustomer, float hireFee, String roomStandard,
+				 float poolArea, String description, int floor) {
+		this.id = id;
+		this.serviceName = serviceName;
+		this.usedArea = usedArea;
+		this.hireType = hireType;
+		this.maxCustomer = maxCustomer;
+		this.hireFee = hireFee;
+		this.roomStandard = roomStandard;
+		this.poolArea = poolArea;
+		this.description = description;
+		this.floor = floor;
+	}
+
 	public String getRoomStandard() {
 		return roomStandard;
 	}
@@ -93,7 +108,7 @@ public class Villa extends Services {
 		this.floor = scanner.nextInt();
 		scanner.nextLine(); // consume the '\n' character
 
-		System.out.println("Enter the description: ");
+		System.out.print("Enter the description: ");
 		this.description = scanner.nextLine();
 	}
 	public String toCsvString() {

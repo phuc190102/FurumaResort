@@ -6,6 +6,29 @@ import java.util.Scanner;
 
 public class Room extends Services {
 	public String freeService;
+
+	public Room() {
+	}
+
+	public Room(String id, String serviceName, float usedArea, String hireType,
+				int maxCustomer, float hireFee, String freeService) {
+		this.id = id;
+		this.serviceName = serviceName;
+		this.usedArea = usedArea;
+		this.hireType = hireType;
+		this.maxCustomer = maxCustomer;
+		this.hireFee = hireFee;
+		this.freeService = freeService;
+	}
+
+	public String getFreeService() {
+		return freeService;
+	}
+
+	public void setFreeService(String freeService) {
+		this.freeService = freeService;
+	}
+
 	public void showInfor(){
 		System.out.println("Id: "+this.id);
 		System.out.println("Tên dịch vụ: "+this.serviceName);

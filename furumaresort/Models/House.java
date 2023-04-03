@@ -11,6 +11,21 @@ public class House extends Services {
 
 	public House() {
 	}
+	public House(String id, String serviceName, float usedArea, String hireType,
+				 int maxCustomer, float hireFee, String roomStandard,
+				 String description, int floor) {
+		this.id = id;
+		this.serviceName = serviceName;
+		this.usedArea = usedArea;
+		this.hireType = hireType;
+		this.maxCustomer = maxCustomer;
+		this.hireFee = hireFee;
+		this.roomStandard = roomStandard;
+		this.description = description;
+		this.floor = floor;
+	}
+
+
 
 	public String getRoomStandard() {
 		return roomStandard;
@@ -35,6 +50,8 @@ public class House extends Services {
 	public void setFloor(int floor) {
 		this.floor = floor;
 	}
+
+
 
 	public void showInfor(){
 		System.out.println("Id: "+this.id);
@@ -79,7 +96,7 @@ public class House extends Services {
 		this.floor = scanner.nextInt();
 		scanner.nextLine(); // consume the '\n' character
 
-		System.out.println("Enter the description: ");
+		System.out.print("Enter the description: ");
 		this.description = scanner.nextLine();
 	}
 	public String toCsvString() {
