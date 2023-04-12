@@ -38,35 +38,101 @@ public class Room extends Services {
 		System.out.println("Kiểu thuê: "+this.hireType);
 		System.out.println("Dịch vụ miễn phí đi kèm: "+this.freeService);
 	}
-	public void inputData(){
+	public class Validation {
+		public static boolean isValidId(String id) {
+			return id.matches("^SVRO-\\d{4}$");
+		}
+
+		public static boolean isValidName(String name) {
+			return name.matches("^[A-Z][a-z]*(\\s[A-Z][a-z]*)*$");
+		}
+
+		public static boolean isValidArea(float area) {
+			return area > 0;
+		}
+
+		public static boolean isValidHireType(String hireType) {
+			return hireType.matches("^[A-Z][a-z]*(\\s[A-Z][a-z]*)*$");
+		}
+
+		public static boolean isValidMaxCustomer(int maxCustomer) {
+			return maxCustomer > 0 && maxCustomer < 20;
+		}
+
+		public static boolean isValidHireFee(float hireFee) {
+			return hireFee > 0;
+		}
+
+		public static boolean isValidFreeService(String freeService) {
+			return freeService.matches("^(Massage|Karaoke|Food|Drink|Car)$");
+		}
+	}
+	public void inputData() {
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("===== ADD NEW VILLA =====");
-		System.out.print("Enter id: ");
-		this.id = scanner.nextLine();
+		System.out.println("===== ADD NEW ROOM =====");
 
-		System.out.print("Enter Service Name: ");
-		this.serviceName = scanner.nextLine();
+		do {
+			System.out.print("Enter id: ");
+			this.id = scanner.nextLine();
+			if (!Room.Validation.isValidId(this.id)) {
+				System.out.println("Invalid input. Please enter a valid ID.");
+			}
+		} while (!Validation.isValidId(this.id));
 
-		System.out.print("Enter usedArea: ");
-		this.usedArea = scanner.nextFloat();
-		scanner.nextLine(); // consume the '\n' character
+		do {
+			System.out.print("Enter Service Name: ");
+			this.serviceName = scanner.nextLine();
+			if (!Room.Validation.isValidName(this.serviceName)) {
+				System.out.println("Invalid input. Please enter a valid serviceName.");
+			}
+		} while (!Validation.isValidName(this.serviceName));
 
-		System.out.print("Enter hire Type: ");
-		this.hireType = scanner.nextLine();
+		do {
+			System.out.print("Enter usedArea: ");
+			this.usedArea = scanner.nextFloat();
+			scanner.nextLine();
+			if (!Room.Validation.isValidArea(this.usedArea)) {
+				System.out.println("Invalid input. Please enter a valid usedArea.");
+			}
+		} while (!Validation.isValidArea(this.usedArea));
 
+		do {
+			System.out.print("Enter hire Type: ");
+			this.hireType = scanner.nextLine();
+			if (!Room.Validation.isValidHireType(this.hireType)) {
+				System.out.println("Invalid input. Please enter a valid hireType.");
+			}
+		} while (!Validation.isValidHireType(this.hireType));
 
-		System.out.print("Enter max number of people: ");
-		this.maxCustomer = scanner.nextInt();
-		scanner.nextLine(); // consume the '\n' character
+		do {
+			System.out.print("Enter max number of people: ");
+			this.maxCustomer = scanner.nextInt();
+			scanner.nextLine();
+			if (!Room.Validation.isValidMaxCustomer(this.maxCustomer)) {
+				System.out.println("Invalid input. Please enter a valid maxCustomer.");
+			}
+		} while (!Validation.isValidMaxCustomer(this.maxCustomer));
 
-		System.out.print("Enter hire fee: ");
-		this.hireFee = scanner.nextFloat();
-		scanner.nextLine(); // consume the '\n' character
+		do {
+			System.out.print("Enter hire fee: ");
+			this.hireFee = scanner.nextFloat();
+			scanner.nextLine();
+			if (!Room.Validation.isValidHireFee(this.hireFee)) {
+				System.out.println("Invalid input. Please enter a valid hireFee.");
+			}
+		} while (!Validation.isValidHireFee(this.hireFee));
 
-		System.out.print("Enter Free Service: ");
-		this.freeService = scanner.nextLine();
+		do {
+			System.out.print("Enter free service: ");
+			this.freeService = scanner.nextLine();
+			if (!Room.Validation.isValidFreeService(this.freeService)) {
+				System.out.println("Invalid input. Please enter a valid freeService.");
+			}
+		} while (!Validation.isValidName(this.freeService));
+
 
 	}
+
 	public String toCsvString() {
 		return String.format("%s,%s,%.1f,%s,%d,%.1f,%s",
 			this.id, this.serviceName, this.usedArea, this.hireType, this.maxCustomer,

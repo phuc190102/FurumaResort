@@ -1,8 +1,7 @@
 package furumaresort.Models;
-
 import furumaresort.Models.Services;
-
 import java.util.Scanner;
+
 
 public class Villa extends Services {
 	public String roomStandard;
@@ -72,48 +71,136 @@ public class Villa extends Services {
 		System.out.println("Diện tích hồ bơi: "+this.poolArea);
 		System.out.println("Số tầng: "+this.floor);
 	}
+	public class Validation {
+		public static boolean isValidId(String id) {
+			return id.matches("^SVVL-\\d{4}$");
+		}
+
+		public static boolean isValidName(String name) {
+			return name.matches("^[A-Z][a-z]*$");
+		}
+
+		public static boolean isValidArea(float area) {
+			return area > 30;
+		}
+
+		public static boolean isValidHireType(String hireType) {
+			return hireType.matches("^[A-Z][a-z]*$");
+		}
+		public static boolean isValidRoomStandard(String hireType) {
+			return hireType.matches("^[A-Z][a-z]*$");
+		}
+		public static boolean isValidMaxCustomer(int maxCustomer) {
+			return maxCustomer <= 20 && maxCustomer >= 0;
+		}
+
+		public static boolean isValidHireFee(float hireFee) {
+			return hireFee > 0;
+		}
+
+		public static boolean isValidPoolArea(float poolArea) {
+			return poolArea > 30;
+		}
+
+		public static boolean isValidFloor(int floor) {
+			return floor > 0;
+		}
+	}
+
 	public void inputData(){
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("===== ADD NEW VILLA =====");
-		System.out.print("Enter id: ");
-		this.id = scanner.nextLine();
 
-		System.out.print("Enter Service Name: ");
-		this.serviceName = scanner.nextLine();
+		do {
+			System.out.print("Enter id: ");
+			this.id = scanner.nextLine();
+			if (!Validation.isValidId(this.id)) {
+				System.out.println("Invalid input. Please enter a valid ID.");
+			}
+		} while (!Validation.isValidId(this.id));
 
-		System.out.print("Enter usedArea: ");
-		this.usedArea = scanner.nextFloat();
-		scanner.nextLine(); // consume the '\n' character
+		do {
+			System.out.print("Enter Service Name: ");
+			this.serviceName = scanner.nextLine();
+			if (!Validation.isValidName(this.serviceName)) {
+				System.out.println("Invalid input. Please enter a valid serviceName.");
+			}
+		} while (!Validation.isValidName(this.serviceName));
 
-		System.out.print("Enter hire Type: ");
-		this.hireType = scanner.nextLine();
+		do {
+			System.out.print("Enter usedArea: ");
+			this.usedArea = scanner.nextFloat();
+			scanner.nextLine();
+			if (!Validation.isValidArea(this.usedArea)) {
+				System.out.println("Invalid input. Please enter a valid usedArea.");
+			}
+		} while (!Validation.isValidArea(this.usedArea));
 
+		do {
+			System.out.print("Enter hire Type: ");
+			this.hireType = scanner.nextLine();
+			if (!Validation.isValidHireType(this.hireType)) {
+				System.out.println("Invalid input. Please enter a valid hireType.");
+			}
+		} while (!Validation.isValidHireType(this.hireType));
 
-		System.out.print("Enter max number of people: ");
-		this.maxCustomer = scanner.nextInt();
-		scanner.nextLine(); // consume the '\n' character
+		do {
+			System.out.print("Enter max number of people: ");
+			this.maxCustomer = scanner.nextInt();
+			scanner.nextLine();
+			if (!Validation.isValidMaxCustomer(this.maxCustomer)) {
+				System.out.println("Invalid input. Please enter a valid maxCustomer.");
+			}
+		} while (!Validation.isValidMaxCustomer(this.maxCustomer));
 
-		System.out.print("Enter hire fee: ");
-		this.hireFee = scanner.nextFloat();
-		scanner.nextLine(); // consume the '\n' character
+		do {
+			System.out.print("Enter hire fee: ");
+			this.hireFee = scanner.nextFloat();
+			scanner.nextLine();
+			if (!Validation.isValidHireFee(this.hireFee)) {
+				System.out.println("Invalid input. Please enter a valid hireFee.");
+			}
+		} while (!Validation.isValidHireFee(this.hireFee));
 
-		System.out.print("Enter room standard: ");
-		this.roomStandard = scanner.nextLine();
+		do {
+			System.out.print("Enter room standard: ");
+			this.roomStandard = scanner.nextLine();
+			if (!Validation.isValidRoomStandard(this.roomStandard)) {
+				System.out.println("Invalid input. Please enter a valid roomStandard.");
+			}
+		} while (!Validation.isValidRoomStandard(this.roomStandard));
 
-		System.out.print("Enter pool area: ");
-		this.poolArea = scanner.nextFloat();
-		scanner.nextLine(); // consume the '\n' character
+		do {
+			System.out.print("Enter pool area: ");
+			this.poolArea = scanner.nextFloat();
+			scanner.nextLine();
+			if (!Validation.isValidPoolArea(this.poolArea)) {
+				System.out.println("Invalid input. Please enter a valid poolArea.");
+			}
+		} while (!Validation.isValidPoolArea(this.poolArea));
 
-		System.out.print("Enter number of floors: ");
-		this.floor = scanner.nextInt();
-		scanner.nextLine(); // consume the '\n' character
+		do {
+			System.out.print("Enter number of floors: ");
+			this.floor = scanner.nextInt();
+			scanner.nextLine();
+			if (!Validation.isValidFloor(this.floor)) {
+				System.out.println("Invalid input. Please enter a valid floor.");
+			}
+		} while (!Validation.isValidFloor(this.floor));
 
-		System.out.print("Enter the description: ");
-		this.description = scanner.nextLine();
+		do {
+			System.out.print("Enter the description: ");
+			this.description = scanner.nextLine();
+			if (!Validation.isValidName(this.description)) {
+				System.out.println("Invalid input. Please enter a valid description.");
+			}
+		} while (!Validation.isValidName(this.description));
 	}
 	public String toCsvString() {
 		return String.format("%s,%s,%.1f,%s,%d,%.1f,%s,%.1f,%s,%d",
 			this.id, this.serviceName, this.usedArea, this.hireType, this.maxCustomer,
 			this.hireFee, this.roomStandard, this.poolArea, this.description, this.floor);
 	}
-}
+
+	}
+
