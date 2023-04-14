@@ -1,5 +1,6 @@
 package furumaresort.Controllers;
 
+import furumaresort.Models.Customer;
 import furumaresort.Models.House;
 import furumaresort.Models.Room;
 import furumaresort.Models.Villa;
@@ -12,6 +13,7 @@ public class MainController {
 	private final String villaFile = "D:/Aphucdeptrai/furumaresort/Data/Villa.csv";
 	private final String houseFile = "D:/Aphucdeptrai/furumaresort/Data/House.csv";
 	private final String roomFile = "D:/Aphucdeptrai/furumaresort/Data/Room.csv";
+	private final String customerFile = "D:/Aphucdeptrai/furumaresort/Data/Customer.csv";
 	Scanner scanner = new Scanner(System.in);
 
 	public void displayMainMenu() {
@@ -34,12 +36,12 @@ public class MainController {
 			case 2:
 				showServices();
 				break;
-//			case 3:
-//				addNewCustomer();
-//				break;
-//			case 4:
-//				showInforMationOfCustomer();
-//				break;
+			case 3:
+				addNewCustomer();
+				break;
+			case 4:
+				showInformationOfCustomer();
+				break;
 //			case 5:
 //				addNewBooking();
 //				break;
@@ -271,6 +273,46 @@ public class MainController {
 			count++;
 			System.out.println("===========================================");
 
+		}
+	}
+	public void addNewCustomer(){
+		Customer customer = new Customer();
+		customer.inputData();
+		writeCustomerToFile(customer);
+		System.out.println("New customer has been added successfully!");
+	}
+	private void writeCustomerToFile(Customer customer) {
+		try (PrintWriter writer = new PrintWriter(new FileWriter(customerFile, true))) {
+			writer.println(customer.toCsvString());
+		} catch (IOException e) {
+			System.out.println("Failed to write to file: " + customerFile);
+		}
+	}
+	private void showInformationOfCustomer(){
+		ArrayList<Customer> customers = new ArrayList<>();
+		try {
+			BufferedReader br =
+				new BufferedReader(new FileReader("D:/Aphucdeptrai/furumaresort/Data/Customer.csv"));
+			String line;
+			while ((line= br.readLine())  != null) {
+				String[] fields = line.split(",");
+				Customer customer =
+					new Customer(fields[0], fields[1], fields[2],
+						Integer.parseInt(fields[3]), Integer.parseInt(fields[4]), fields[5], fields[6], fields[7]);
+				customers.add(customer);
+
+			}
+			br.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		int count = 1;
+		for (Customer customer : customers) {
+			System.out.println("Customer number "+count);
+			System.out.println("========================================");
+			customer.showInfor();
+			count++;
+			System.out.println("========================================");
 		}
 	}
 }
